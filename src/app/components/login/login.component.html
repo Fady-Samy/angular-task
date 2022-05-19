@@ -1,0 +1,51 @@
+<section class="background-radial-gradient overflow-hidden" style="height: 100vh;">
+
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+        <div class="row gx-lg-5 align-items-center mb-5">
+            <div class="col-lg-6 mtlg--100 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                    Welcome! <br />
+                    <span style="color: hsl(218, 81%, 75%)">Go ahead and login</span>
+                </h1>
+            </div>
+
+            <div class="col-lg-6 mt-lg-100 mb-5 mb-lg-0 position-relative">
+                <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                <div class="card bg-glass">
+                    <div class="card-body px-4 py-5 px-md-5">
+                        <form [formGroup]="loginForm">
+                            <!-- Phone input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="phone">Phone Number</label>
+                                <input type="text" id="phone" class="form-control" formControlName="phone" />
+                                <span class="invalid-input" *ngIf="phone?.invalid && phone?.touched">*Phone required,
+                                    must
+                                    be 11 digits</span>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" class="form-control" formControlName="password" />
+                                <span class="invalid-input" *ngIf="password?.invalid && password?.touched">*Password
+                                    required</span>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mb-4 loginBtn" (click)="onSubmit()">
+                                Login
+                            </button>
+                        </form>
+                        <div>
+                            <span>Don't have an account ? </span> <a>Signup</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<ngx-spinner size="medium" color="#F0F8FF
+" type="ball-scale-multiple"></ngx-spinner>
