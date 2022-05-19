@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("here")
     let loginCredentials = {
       phoneNumber: this.phone?.value,
       password: this.password?.value
@@ -53,9 +54,9 @@ export class LoginComponent implements OnInit {
       .login(loginCredentials)
       .subscribe(
         (result) => {
-          console.log(result.Data);
+          // console.log(result.Data);
           const tokenInfo = this.getDecodedAccessToken(result.Data.token); // decode token
-          console.log(tokenInfo);
+          // console.log(tokenInfo);
           this.authService.saveLoginInfo(result.Data, tokenInfo)
           this.spinner.hide();
           this.router.navigate(['home'])

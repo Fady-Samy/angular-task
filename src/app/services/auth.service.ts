@@ -30,7 +30,16 @@ export class AuthService {
   }
 
   saveLoginInfo(loginData: object, tokenInfo: object) {
+    this.loginData = loginData;
+    this.tokenInfo = tokenInfo
+  }
 
+  getLoginInfo() {
+    return this.loginData;
+  }
+
+  getTokenInfo() {
+    return this.tokenInfo;
   }
   // getTasks(): Observable<Task[]> {
   //   return this.http.get<Task[]>(this.apiUrl);
