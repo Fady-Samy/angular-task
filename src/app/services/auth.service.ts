@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Login } from '../Models/Login';
+import { Register } from '../Models/Register';
 
 
 const httpOptions = {
@@ -21,12 +22,13 @@ export class AuthService {
   loginData: Object = {};
   tokenInfo: Object = {};
 
-  private apiUrl = 'https://bank.atc-servers.com/api/Auth/login';
+  private loginApiUrl = 'https://bank.atc-servers.com/api/Auth/login';
+  private signupApiUrl = 'https://bank.atc-servers.com/api/Auth/register';
 
   constructor(private http: HttpClient) { }
 
   login(loginCredentials: Login): Observable<any> {
-    return this.http.post(this.apiUrl, loginCredentials, httpOptions);
+    return this.http.post(this.loginApiUrl, loginCredentials, httpOptions);
   }
 
   saveLoginInfo(loginData: object, tokenInfo: object) {
@@ -41,6 +43,11 @@ export class AuthService {
   getTokenInfo() {
     return this.tokenInfo;
   }
+
+  signup(signupCredentials: Register): Observable<any> {
+    return this.http.post(this.signupApiUrl, signupCredentials, httpOptions);
+  }
+
   // getTasks(): Observable<Task[]> {
   //   return this.http.get<Task[]>(this.apiUrl);
   // }

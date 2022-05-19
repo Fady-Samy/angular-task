@@ -48,3 +48,16 @@
     /* font-weight: 500; */
     margin: 10px 0 0 10px;
 }
+
+.signup {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+}
+
+.signupBtn {
+    text-decoration: none;
+
+    margin-left: 10px;
+}
