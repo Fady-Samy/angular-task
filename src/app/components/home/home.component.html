@@ -3,12 +3,12 @@
         <h3 class="title"> Home </h3>
     </div>
     <div class="rightSection">
-        <span>Hello, </span> <b>{{loginInfo.userFullName}}</b>
+        <span>Hello, </span> <b>{{userName}}</b>
         <div class="imageContainer">
             <img class="img" src="assets/avatar.png">
         </div>
 
-        <Button class="logoutBtn">Logout</Button>
+        <Button class="logoutBtn" (click)="logout()">Logout</Button>
     </div>
 </div>
 
