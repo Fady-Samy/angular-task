@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     policyEn: new FormControl('', Validators.required),
     descriptionAr: new FormControl('', Validators.required),
     descriptionEn: new FormControl('', Validators.required),
-    productPhoto: new FormControl(''),
+    productPhoto: new FormControl(null, Validators.required),
     photo: new FormControl('', Validators.required),
     userId: new FormControl('', Validators.required),
     isActive: new FormControl(false, Validators.required),

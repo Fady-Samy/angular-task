@@ -176,6 +176,8 @@
                         <div>
                             <input type="file" id="productPhoto" class="form-control" formControlName="productPhoto"
                                 (change)="fileChange($event)" />
+                            <span class="invalid-input" *ngIf="productPhoto?.invalid && productPhoto?.touched">*Product
+                                photo required</span>
                         </div>
                     </div>
 
