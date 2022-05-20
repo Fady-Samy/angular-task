@@ -16,6 +16,7 @@ declare var window: any;
 })
 export class HomeComponent implements OnInit {
 
+  //Variables Declaratoin
   products: Product[] = [];
   page: number = 1;
   loginInfo: any;
@@ -30,6 +31,12 @@ export class HomeComponent implements OnInit {
   modalBtnText: string;
   imageChoosed: any;
   selectedProduct: any = null;
+
+  // bootstrap toast variables
+  showToast: boolean = false;
+  toastTitle: string;
+  toastMessage: string;
+  toastClass: string;
 
 
   productForm = new FormGroup({
@@ -209,6 +216,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //Setting toast variables
+  setToast(title: string, msg: string, className: string) {
+    this.showToast = true;
+    this.toastTitle = title;
+    this.toastMessage = msg
+    this.toastClass = className
+  }
+
+  hideToast() {
+    setTimeout(() => {
+      this.showToast = false
+    }, 3000);
+  }
+
   //Create/Update Product Function
   createUpdateProduct() {
     let productDetails = this.getProductDetailsbody()
@@ -224,16 +245,31 @@ export class HomeComponent implements OnInit {
         (result) => {
           console.log(result);
           this.productForm.reset();
+          //get the products to the show the update or new without refresh
           this.getProductsPerPage();
           this.spinner.hide();
           this.closeModal()
+          //Setting toast values
+          if (this.createModal) {
+            this.setToast("Succsess", "Product created successfuly", "bg-success")
+          } else {
+            this.setToast("Succsess", "Product updated successfuly", "bg-success")
+          }
+          //Dismiss toast after 3 seconds
+          this.hideToast()
         },
         err => {
           this.spinner.hide();
           if (this.updateModal) {
-            alert("There was a problem updating the product ")
+            //Setting toast values
+            this.setToast("Error", "There was a problem updating the product", "bg-danger")
+            //Dismiss toast after 3 seconds
+            this.hideToast()
           } else {
-            alert("There was a problem creating the product ")
+            //Setting toast values
+            this.setToast("Error", "There was a problem creating the product", "bg-danger")
+            //Dismiss toast after 3 seconds
+            this.hideToast()
           }
 
         }

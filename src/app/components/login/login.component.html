@@ -1,4 +1,4 @@
-<section class="background-radial-gradient overflow-hidden" style="height: 100vh;">
+<section class="login background-radial-gradient overflow-hidden" style="height: 100vh;">
 
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
         <div class="row gx-lg-5 align-items-center mb-5">
@@ -47,6 +47,8 @@
             </div>
         </div>
     </div>
+    <app-toast *ngIf="showToast" [toastTitle]="toastTitle" [toastMessage]="toastMessage" [toastClass]="toastClass">
+    </app-toast>
 </section>
 <ngx-spinner size="medium" color="#F0F8FF
 " type="ball-scale-multiple"></ngx-spinner>

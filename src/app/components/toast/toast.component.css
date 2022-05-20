@@ -1,0 +1,16 @@
+.toast {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+}
+
+.header {
+    color: white;
+    font-size: 16px;
+}
+
+.toast-body {
+    background-color: #e0e1df;
+}

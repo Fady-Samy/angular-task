@@ -19,8 +19,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   })
 
-
-
+  // bootstrap toast variables
+  showToast: boolean = false;
+  toastTitle: string;
+  toastMessage: string;
+  toastClass: string;
 
   constructor(private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
 
@@ -44,6 +47,20 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //Setting toast variables
+  setToast(title: string, msg: string, className: string) {
+    this.showToast = true;
+    this.toastTitle = title;
+    this.toastMessage = msg
+    this.toastClass = className
+  }
+
+  hideToast() {
+    setTimeout(() => {
+      this.showToast = false
+    }, 3000);
+  }
+
   onSubmit() {
     let loginCredentials = {
       phoneNumber: this.phone?.value,
@@ -60,12 +77,12 @@ export class LoginComponent implements OnInit {
           // console.log(tokenInfo);
           this.authService.setSession(result.Data, tokenInfo)
           this.spinner.hide();
-
           this.router.navigate(['home'])
         },
         err => {
           this.spinner.hide();
-          alert("Error, Check Your Credentials")
+          this.setToast("Error", "Error login, Check Your Credentials", "bg-danger")
+          this.hideToast()
         }
       );
   }

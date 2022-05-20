@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 
 const appRoutes: Routes = [
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

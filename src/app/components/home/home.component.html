@@ -1,232 +1,247 @@
-<div class="header">
-    <div class="leftSection">
-        <h3 class="title"> Home </h3>
-    </div>
-    <div class="rightSection">
-        <span>Hello, </span> <b>{{userName}}</b>
-        <div class="imageContainer">
-            <img class="img" src="assets/avatar.png">
+<div class="homePage">
+    <div class="header">
+        <div class="leftSection">
+            <h3 class="title"> Home </h3>
         </div>
-
-        <Button class="logoutBtn" (click)="logout()">Logout</Button>
-    </div>
-</div>
-
-
-<div class="mainContainer">
-    <div class="heading">
-        <h2 class="title">Products</h2>
-        <Button *ngIf="isAdmin" class="createBtn" (click)="openModal('create',null)">Create</Button>
-    </div>
-
-
-    <div class=" productsContainer">
-        <app-product *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: page}"
-            [product]="product" [isAdmin]="isAdmin" (onSelectProduct)="openModal('update',product)">
-        </app-product>
-    </div>
-
-    <pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
-
-</div>
-
-<!-- Modal Dialog shown on create or update -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="editModalLabel">{{modalTitle}}</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="rightSection">
+            <span>Hello, </span> <b>{{userName}}</b>
+            <div class="imageContainer">
+                <img class="img" src="assets/avatar.png">
             </div>
-            <div class="modal-body">
-                <form [formGroup]="productForm">
-                    <!-- NameAr input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="nameAr">NameAr</label>
-                        <div>
-                            <input type="text" id="nameAr" class="form-control" formControlName="nameAr" />
-                            <span class="invalid-input" *ngIf="nameAr?.invalid && nameAr?.touched">*Arabic name
-                                required</span>
-                        </div>
 
-                    </div>
-                    <!-- NameEn input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="nameEn">NameEn</label>
-                        <div>
-                            <input type="text" id="nameEn" class="form-control" formControlName="nameEn" />
-                            <span class="invalid-input" *ngIf="nameEn?.invalid && nameEn?.touched">*English name
-                                required,
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Code input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="code">Code</label>
-                        <div>
-                            <input type="text" id="code" class="form-control" formControlName="code" />
-                            <span class="invalid-input" *ngIf="code?.invalid && code?.touched">*Code
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- Barcode input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="barcode">Barcode</label>
-                        <div>
-                            <input type="text" id="barcode" class="form-control" formControlName="barcode" />
-                            <span class="invalid-input" *ngIf="barcode?.invalid && barcode?.touched">*Barcode
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- RunningBalance input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="runningBalance">RunningBalance</label>
-                        <div>
-                            <input type="number" min="0" id="runningBalance" class="form-control"
-                                formControlName="runningBalance" />
-                            <span class="invalid-input"
-                                *ngIf="runningBalance?.invalid && runningBalance?.touched">*Running balance
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- Points input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="points">Points</label>
-                        <div>
-                            <input type="number" min="0" id="points" class="form-control" formControlName="points" />
-                            <span class="invalid-input" *ngIf="points?.invalid && points?.touched">*Points
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- MinQuantityAlarm input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="minQuantity">MinQuantityAlarm</label>
-                        <div>
-                            <input type="number" min="0" id="minQuantity" class="form-control"
-                                formControlName="minQuantity" />
-                            <span class="invalid-input" *ngIf="minQuantity?.invalid && minQuantity?.touched">*Minimum
-                                quantity required</span>
-                        </div>
-                    </div>
-
-                    <!-- MaxQuantityAlarm input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="maxQuantity">MaxQuantityAlarm</label>
-                        <div>
-                            <input type="number" min="0" id="maxQuantity" class="form-control"
-                                formControlName="maxQuantity" />
-                            <span class="invalid-input" *ngIf="maxQuantity?.invalid && maxQuantity?.touched">*Maximum
-                                quantity required</span>
-                        </div>
-                    </div>
-
-                    <!-- PolicyAr input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="policyAr">PolicyAr</label>
-                        <div>
-                            <input type="text" id="policyAr" class="form-control" formControlName="policyAr" />
-                            <span class="invalid-input" *ngIf="policyAr?.invalid && policyAr?.touched">*Arabic policy
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- PolicyEn input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="policyEn">PolicyEn</label>
-                        <div>
-                            <input type="text" id="policyEn" class="form-control" formControlName="policyEn" />
-                            <span class="invalid-input" *ngIf="policyEn?.invalid && policyEn?.touched">*English policy
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- DescriptionAr input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="descriptionAr">DescriptionAr</label>
-                        <div>
-                            <input type="text" id="descriptionAr" class="form-control"
-                                formControlName="descriptionAr" />
-                            <span class="invalid-input" *ngIf="descriptionAr?.invalid && descriptionAr?.touched">*Arabic
-                                description required</span>
-                        </div>
-                    </div>
-
-                    <!-- DescriptionEn input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="descriptionEn">DescriptionEn</label>
-                        <div>
-                            <input type="text" id="descriptionEn" class="form-control"
-                                formControlName="descriptionEn" />
-                            <span class="invalid-input"
-                                *ngIf="descriptionEn?.invalid && descriptionEn?.touched">*English description
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- ProductPhoto input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="productPhoto">ProductPhoto</label>
-                        <div>
-                            <input type="file" id="productPhoto" class="form-control" formControlName="productPhoto"
-                                (change)="fileChange($event)" />
-                            <span class="invalid-input" *ngIf="productPhoto?.invalid && productPhoto?.touched">*Product
-                                photo required</span>
-                        </div>
-                    </div>
-
-                    <!-- Photo input -->
-                    <div class=" form-outline mb-4">
-                        <label class="form-label" for="photo">Photo</label>
-                        <div>
-                            <input type="text" id="photo" class="form-control" formControlName="photo" />
-                            <span class="invalid-input" *ngIf="photo?.invalid && photo?.touched">*Photo
-                                required</span>
-                        </div>
-                    </div>
-
-                    <!-- UserId input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="userId">UserId</label>
-                        <div>
-                            <input type="text" id="userId" class="form-control" formControlName="userId" />
-                            <span class="invalid-input" *ngIf="userId?.invalid && userId?.touched">*User id
-                                required</span>
-                        </div>
-                    </div>
-                    <!-- IsActive input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="isActive">IsActive</label>
-                        <div>
-                            <input type="checkbox" id="isActive" class="activeCheckBox" formControlName="isActive" />
-                        </div>
-                    </div>
-                    <!-- EndUserPrice input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="endUserPrice">EndUserPrice</label>
-                        <div>
-                            <input type="number" min="0" id="endUserPrice" class="form-control"
-                                formControlName="endUserPrice" />
-                            <span class="invalid-input" *ngIf="endUserPrice?.invalid && endUserPrice?.touched">*User
-                                price required</span>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn " data-dismiss="modal">Close</button>
-                <button type="button" class="btn saveBtn" (click)="createUpdateProduct()"
-                    [disabled]="productForm.invalid">{{modalBtnText}}</button>
-            </div>
+            <Button class="logoutBtn" (click)="logout()">Logout</Button>
         </div>
     </div>
-    <ngx-spinner size="medium" color="#F0F8FF
-" type="ball-scale-multiple"></ngx-spinner>
+
+
+    <div class="mainContainer">
+        <div class="heading">
+            <h2 class="title">Products</h2>
+            <Button *ngIf="isAdmin" class="createBtn" (click)="openModal('create',null)">Create</Button>
+        </div>
+
+
+        <div class=" productsContainer">
+            <app-product *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: page}"
+                [product]="product" [isAdmin]="isAdmin" (onSelectProduct)="openModal('update',product)">
+            </app-product>
+        </div>
+
+        <pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
+
+    </div>
+
+    <!-- Modal Dialog shown on create or update -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editModalLabel">{{modalTitle}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="productForm">
+                        <!-- NameAr input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="nameAr">NameAr</label>
+                            <div>
+                                <input type="text" id="nameAr" class="form-control" formControlName="nameAr" />
+                                <span class="invalid-input" *ngIf="nameAr?.invalid && nameAr?.touched">*Arabic name
+                                    required</span>
+                            </div>
+
+                        </div>
+                        <!-- NameEn input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="nameEn">NameEn</label>
+                            <div>
+                                <input type="text" id="nameEn" class="form-control" formControlName="nameEn" />
+                                <span class="invalid-input" *ngIf="nameEn?.invalid && nameEn?.touched">*English name
+                                    required,
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Code input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="code">Code</label>
+                            <div>
+                                <input type="text" id="code" class="form-control" formControlName="code" />
+                                <span class="invalid-input" *ngIf="code?.invalid && code?.touched">*Code
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- Barcode input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="barcode">Barcode</label>
+                            <div>
+                                <input type="text" id="barcode" class="form-control" formControlName="barcode" />
+                                <span class="invalid-input" *ngIf="barcode?.invalid && barcode?.touched">*Barcode
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- RunningBalance input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="runningBalance">RunningBalance</label>
+                            <div>
+                                <input type="number" min="0" id="runningBalance" class="form-control"
+                                    formControlName="runningBalance" />
+                                <span class="invalid-input"
+                                    *ngIf="runningBalance?.invalid && runningBalance?.touched">*Running balance
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- Points input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="points">Points</label>
+                            <div>
+                                <input type="number" min="0" id="points" class="form-control"
+                                    formControlName="points" />
+                                <span class="invalid-input" *ngIf="points?.invalid && points?.touched">*Points
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- MinQuantityAlarm input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="minQuantity">MinQuantityAlarm</label>
+                            <div>
+                                <input type="number" min="0" id="minQuantity" class="form-control"
+                                    formControlName="minQuantity" />
+                                <span class="invalid-input"
+                                    *ngIf="minQuantity?.invalid && minQuantity?.touched">*Minimum
+                                    quantity required</span>
+                            </div>
+                        </div>
+
+                        <!-- MaxQuantityAlarm input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="maxQuantity">MaxQuantityAlarm</label>
+                            <div>
+                                <input type="number" min="0" id="maxQuantity" class="form-control"
+                                    formControlName="maxQuantity" />
+                                <span class="invalid-input"
+                                    *ngIf="maxQuantity?.invalid && maxQuantity?.touched">*Maximum
+                                    quantity required</span>
+                            </div>
+                        </div>
+
+                        <!-- PolicyAr input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="policyAr">PolicyAr</label>
+                            <div>
+                                <input type="text" id="policyAr" class="form-control" formControlName="policyAr" />
+                                <span class="invalid-input" *ngIf="policyAr?.invalid && policyAr?.touched">*Arabic
+                                    policy
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- PolicyEn input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="policyEn">PolicyEn</label>
+                            <div>
+                                <input type="text" id="policyEn" class="form-control" formControlName="policyEn" />
+                                <span class="invalid-input" *ngIf="policyEn?.invalid && policyEn?.touched">*English
+                                    policy
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- DescriptionAr input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="descriptionAr">DescriptionAr</label>
+                            <div>
+                                <input type="text" id="descriptionAr" class="form-control"
+                                    formControlName="descriptionAr" />
+                                <span class="invalid-input"
+                                    *ngIf="descriptionAr?.invalid && descriptionAr?.touched">*Arabic
+                                    description required</span>
+                            </div>
+                        </div>
+
+                        <!-- DescriptionEn input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="descriptionEn">DescriptionEn</label>
+                            <div>
+                                <input type="text" id="descriptionEn" class="form-control"
+                                    formControlName="descriptionEn" />
+                                <span class="invalid-input"
+                                    *ngIf="descriptionEn?.invalid && descriptionEn?.touched">*English description
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- ProductPhoto input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="productPhoto">ProductPhoto</label>
+                            <div>
+                                <input type="file" id="productPhoto" class="form-control" formControlName="productPhoto"
+                                    (change)="fileChange($event)" />
+                                <span class="invalid-input"
+                                    *ngIf="productPhoto?.invalid && productPhoto?.touched">*Product
+                                    photo required</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo input -->
+                        <div class=" form-outline mb-4">
+                            <label class="form-label" for="photo">Photo</label>
+                            <div>
+                                <input type="text" id="photo" class="form-control" formControlName="photo" />
+                                <span class="invalid-input" *ngIf="photo?.invalid && photo?.touched">*Photo
+                                    required</span>
+                            </div>
+                        </div>
+
+                        <!-- UserId input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="userId">UserId</label>
+                            <div>
+                                <input type="text" id="userId" class="form-control" formControlName="userId" />
+                                <span class="invalid-input" *ngIf="userId?.invalid && userId?.touched">*User id
+                                    required</span>
+                            </div>
+                        </div>
+                        <!-- IsActive input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="isActive">IsActive</label>
+                            <div>
+                                <input type="checkbox" id="isActive" class="activeCheckBox"
+                                    formControlName="isActive" />
+                            </div>
+                        </div>
+                        <!-- EndUserPrice input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="endUserPrice">EndUserPrice</label>
+                            <div>
+                                <input type="number" min="0" id="endUserPrice" class="form-control"
+                                    formControlName="endUserPrice" />
+                                <span class="invalid-input" *ngIf="endUserPrice?.invalid && endUserPrice?.touched">*User
+                                    price required</span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn " data-dismiss="modal">Close</button>
+                    <button type="button" class="btn saveBtn" (click)="createUpdateProduct()"
+                        [disabled]="productForm.invalid">{{modalBtnText}}</button>
+                </div>
+            </div>
+        </div>
+        <!-- Loading Spinner -->
+        <ngx-spinner size="medium" color="#F0F8FF
+    " type="ball-scale-multiple"></ngx-spinner>
+    </div>
+    <!-- Toast -->
+    <app-toast *ngIf="showToast" [toastTitle]="toastTitle" [toastMessage]="toastMessage" [toastClass]="toastClass">
+    </app-toast>
 </div>

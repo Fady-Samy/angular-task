@@ -19,6 +19,13 @@ export class RegisterComponent implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern("^[0-9]*$")]),
     password: new FormControl('', Validators.required)
   })
+
+  // bootstrap toast variables
+  showToast: boolean = false;
+  toastTitle: string;
+  toastMessage: string;
+  toastClass: string;
+
   constructor(private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit(): void {
@@ -51,6 +58,19 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  //Setting toast variables
+  setToast(title: string, msg: string, className: string) {
+    this.showToast = true;
+    this.toastTitle = title;
+    this.toastMessage = msg
+    this.toastClass = className
+  }
+
+  hideToast() {
+    setTimeout(() => {
+      this.showToast = false
+    }, 3000);
+  }
 
   onSubmit() {
 
@@ -87,7 +107,8 @@ export class RegisterComponent implements OnInit {
         },
         err => {
           this.spinner.hide();
-          alert("There was a problem signing up ")
+          this.setToast("Error", "There was a problem signing up", "bg-danger")
+          this.hideToast()
         }
       );
   }
