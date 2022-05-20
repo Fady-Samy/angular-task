@@ -7,7 +7,7 @@ import { Register } from '../Models/Register';
 import * as moment from "moment";
 
 
-const httpOptions = {
+let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   }),
@@ -40,6 +40,7 @@ export class AuthService {
     localStorage.setItem('user_role', tokenInfo.role);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
   }
+
 
   logout() {
     localStorage.removeItem("id_token");

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
+
 declare var window: any;
 
 @Component({
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   updateModal: boolean = false;
   modalTitle: string;
   modalBtnText: string;
+  imageChoosed: any;
 
 
   productForm = new FormGroup({
@@ -75,7 +77,7 @@ export class HomeComponent implements OnInit {
   }
 
   //Show Modal Functions
-  openModal(action: string) {
+  openModal(action: string, product: any) {
     if (action === "create") {
       this.createModal = true;
       this.updateModal = false;
@@ -166,8 +168,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  fileChange(event: any): void {
+    const fileList: FileList = event.target.files;
+    this.imageChoosed = fileList[0];
+  }
+
   createProduct() {
     let productDetails = {
+      BrandId: 2,
+      CategoryId: 2,
       NameAr: this.nameAr?.value,
       NameEn: this.nameEn?.value,
       Code: this.code?.value,
@@ -180,13 +189,13 @@ export class HomeComponent implements OnInit {
       PolicyEn: this.policyEn?.value,
       DescriptionAr: this.descriptionAr?.value,
       DescriptionEn: this.descriptionEn?.value,
-      ProductPhoto: this.productPhoto?.value,
+      ProductPhoto: this.imageChoosed,
       Photo: this.photo?.value,
       UserId: this.userId?.value,
       IsActive: this.isActive?.value,
       EndUserPrice: this.endUserPrice?.value,
     }
-    // console.log(productDetails);
+    console.log(productDetails);
     this.spinner.show();
     this.productsService
       .createUpdateProduct(productDetails)
@@ -194,9 +203,7 @@ export class HomeComponent implements OnInit {
         (result) => {
           console.log(result);
           this.productForm.reset();
-
           this.spinner.hide();
-
           this.closeModal()
         }
       );

@@ -18,3 +18,5 @@ body {
     /* font-weight: 500; */
     margin: 10px 0 0 10px;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

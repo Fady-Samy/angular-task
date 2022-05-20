@@ -16,13 +16,13 @@
 <div class="mainContainer">
     <div class="heading">
         <h2 class="title">Products</h2>
-        <Button *ngIf="isAdmin" class="createBtn" (click)="openModal('create')">Create</Button>
+        <Button *ngIf="isAdmin" class="createBtn" (click)="openModal('create',null)">Create</Button>
     </div>
 
 
     <div class=" productsContainer">
         <app-product *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: page}"
-            [product]="product">
+            [product]="product" (onSelectProduct)="openModal('update',product)">
         </app-product>
     </div>
 
@@ -174,12 +174,13 @@
                     <div class="form-outline mb-4">
                         <label class="form-label" for="productPhoto">ProductPhoto</label>
                         <div>
-                            <input type="file" id="productPhoto" class="form-control" formControlName="productPhoto" />
+                            <input type="file" id="productPhoto" class="form-control" formControlName="productPhoto"
+                                (change)="fileChange($event)" />
                         </div>
                     </div>
 
                     <!-- Photo input -->
-                    <div class="form-outline mb-4">
+                    <div class=" form-outline mb-4">
                         <label class="form-label" for="photo">Photo</label>
                         <div>
                             <input type="text" id="photo" class="form-control" formControlName="photo" />
