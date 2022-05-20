@@ -227,29 +227,4 @@ export class HomeComponent implements OnInit {
       );
 
   }
-
-  //Update existing product function
-  updateProduct() {
-    let productDetails = this.getProductDetailsbody()
-
-    console.log(productDetails);
-    this.spinner.show();
-    this.productsService
-      .createUpdateProduct(productDetails)
-      .subscribe(
-        (result) => {
-          console.log(result);
-          this.productForm.reset();
-          this.getProductsPerPage();
-          this.spinner.hide();
-          this.closeModal()
-        },
-        err => {
-          this.spinner.hide();
-
-        }
-      );
-  }
-
-
 }
