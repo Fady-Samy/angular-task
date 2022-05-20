@@ -13,6 +13,12 @@ let httpOptions = {
   }),
 };
 
+let createHeader = {
+  headers: new HttpHeaders({
+    'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiJhMTUwN2UwMS1jNmQyLTQ0NWYtYjU2Yi1kMmIyODU5NDNmZTAiLCJVc2VyTmFtZSI6IkZhZHkiLCJyb2xlIjoiQWRtaW4iLCJQZXJtaXNzaW9uIjpbIlByb2R1Y3QuQ3JlYXRlIiwiQnJhbmQuQ3JlYXRlIiwiQ2F0ZWdvcnkuQ3JlYXRlIl0sIm5iZiI6MTY1MzA1NzAwNywiZXhwIjoxNjUzMTQzNDA3LCJpYXQiOjE2NTMwNTcwMDd9.2JOHQnFBpCgPBlJ-AqZpRvzRW4WHhGnT-6dDgJShmwo"
+  }),
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +45,16 @@ export class AuthService {
     localStorage.setItem('user_name', loginInfo.userFullName);
     localStorage.setItem('user_role', tokenInfo.role);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+
+    createHeader = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${loginInfo.token}`
+      }),
+    };
+  }
+
+  getHeader() {
+    return createHeader;
   }
 
 
