@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   modalTitle: string;
   modalBtnText: string;
   imageChoosed: any;
-  selectedProduct: any;
+  selectedProduct: any = null;
 
 
   productForm = new FormGroup({
@@ -89,6 +89,9 @@ export class HomeComponent implements OnInit {
       this.updateModal = false;
       this.modalTitle = "Create New Product";
       this.modalBtnText = "Create Product";
+      this.selectedProduct = null
+      //remove values from update modal (in case opened update modal first)
+      this.productForm.reset()
 
     } else {
       this.createModal = false;
@@ -96,12 +99,22 @@ export class HomeComponent implements OnInit {
       this.modalTitle = "Edit Product";
       this.modalBtnText = "Save changes";
       this.selectedProduct = product;
+      this.setFormValuesFromProduct(product)
       console.log(this.selectedProduct);
     }
     this.formModal.show();
   }
   closeModal() {
     this.formModal.hide();
+  }
+
+  setFormValuesFromProduct(product: any) {
+    this.productForm.get("nameAr")?.setValue(product.ProductName)
+    this.productForm.get("nameEn")?.setValue(product.ProductName)
+    this.productForm.get("code")?.setValue(product.Code)
+    this.productForm.get("descriptionAr")?.setValue(product.Description)
+    this.productForm.get("descriptionEn")?.setValue(product.Description)
+    this.productForm.get("endUserPrice")?.setValue(product.EndUserPrice)
   }
 
   //Form Functions
