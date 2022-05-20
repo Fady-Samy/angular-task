@@ -22,7 +22,7 @@
 
     <div class=" productsContainer">
         <app-product *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: page}"
-            [product]="product" (onSelectProduct)="openModal('update',product)">
+            [product]="product" [isAdmin]="isAdmin" (onSelectProduct)="openModal('update',product)">
         </app-product>
     </div>
 

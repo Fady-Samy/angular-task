@@ -8,6 +8,7 @@ import { Product } from 'src/app/Models/Products';
 })
 export class ProductComponent implements OnInit {
   @Input() product: Product;
+  @Input() isAdmin: boolean;
   @Output() onSelectProduct: EventEmitter<Product> = new EventEmitter();
   constructor() { }
 
@@ -15,7 +16,11 @@ export class ProductComponent implements OnInit {
   }
 
   selectProduct() {
-    this.onSelectProduct.emit(this.product);
+    //Only Admins can update product
+    if (this.isAdmin) {
+      this.onSelectProduct.emit(this.product);
+    }
+
   }
 
 }
