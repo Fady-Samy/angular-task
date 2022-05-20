@@ -53,11 +53,13 @@ export class LoginComponent implements OnInit {
       .login(loginCredentials)
       .subscribe(
         (result) => {
+          this.loginForm.reset();
           // console.log(result.Data);
           const tokenInfo = this.getDecodedAccessToken(result.Data.token); // decode token
           // console.log(tokenInfo);
           this.authService.setSession(result.Data, tokenInfo)
           this.spinner.hide();
+
           this.router.navigate(['home'])
         }
       );

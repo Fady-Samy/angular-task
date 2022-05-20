@@ -77,6 +77,7 @@ export class RegisterComponent implements OnInit {
             console.log(tokenInfo);
             this.authService.login(loginCredentials).subscribe(
               () => {
+                this.signupForm.reset();
                 this.authService.setSession(result.Data, tokenInfo)
                 this.spinner.hide();
                 this.router.navigate(['home'])

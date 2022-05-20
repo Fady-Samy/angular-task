@@ -13,7 +13,11 @@
 </div>
 
 <div class="mainContainer">
-    <h2 class="title">Products</h2>
+    <div class="heading">
+        <h2 class="title">Products</h2>
+        <Button *ngIf="isAdmin" class="createBtn" (click)="createProduct()">Create</Button>
+    </div>
+
 
     <div class="productsContainer">
         <app-product *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: page}"
