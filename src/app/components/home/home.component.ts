@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   modalTitle: string;
   modalBtnText: string;
   imageChoosed: any;
+  selectedProduct: any;
 
 
   productForm = new FormGroup({
@@ -68,6 +69,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //Getting products function
   getProductsPerPage() {
     let body: ProductSearch = {
       "pageNo": this.page,
@@ -93,8 +95,8 @@ export class HomeComponent implements OnInit {
       this.updateModal = true;
       this.modalTitle = "Edit Product";
       this.modalBtnText = "Save changes";
-
-
+      this.selectedProduct = product;
+      console.log(this.selectedProduct);
     }
     this.formModal.show();
   }
@@ -102,7 +104,7 @@ export class HomeComponent implements OnInit {
     this.formModal.hide();
   }
 
-  //Forms Functions
+  //Form Functions
   get nameAr() {
     return this.productForm.get("nameAr")
   }
@@ -163,22 +165,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["/"]);
   }
 
-
-  handleSubmit() {
-    if (this.createModal) {
-      this.createProduct();
-    } else {
-      this.updateProduct();
-    }
-  }
-
+  //Get the photo selected from product photo field
   fileChange(event: any): void {
     const fileList: FileList = event.target.files;
     this.imageChoosed = fileList[0];
   }
 
-  createProduct() {
-    let productDetails = {
+  //Return new/update product body object 
+  getProductDetailsbody() {
+    return {
       BrandId: 2,
       CategoryId: 2,
       NameAr: this.nameAr?.value,
@@ -199,6 +194,15 @@ export class HomeComponent implements OnInit {
       IsActive: this.isActive?.value,
       EndUserPrice: this.endUserPrice?.value,
     }
+  }
+
+  //Create/Update Product Function
+  createUpdateProduct() {
+    let productDetails = this.getProductDetailsbody()
+    //In case of update model we add the id of the product we want to update in the request body object 
+    if (this.updateModal) {
+      Object.assign(productDetails, { Id: this.selectedProduct.ProductId });
+    }
     console.log(productDetails);
     this.spinner.show();
     this.productsService
@@ -213,14 +217,38 @@ export class HomeComponent implements OnInit {
         },
         err => {
           this.spinner.hide();
-          alert("There was a problem creating the product ")
+          if (this.updateModal) {
+            alert("There was a problem updating the product ")
+          } else {
+            alert("There was a problem creating the product ")
+          }
+
         }
       );
 
   }
 
+  //Update existing product function
   updateProduct() {
+    let productDetails = this.getProductDetailsbody()
 
+    console.log(productDetails);
+    this.spinner.show();
+    this.productsService
+      .createUpdateProduct(productDetails)
+      .subscribe(
+        (result) => {
+          console.log(result);
+          this.productForm.reset();
+          this.getProductsPerPage();
+          this.spinner.hide();
+          this.closeModal()
+        },
+        err => {
+          this.spinner.hide();
+
+        }
+      );
   }
 
 

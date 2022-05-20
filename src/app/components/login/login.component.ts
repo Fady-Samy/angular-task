@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (result) => {
           this.loginForm.reset();
-          // console.log(result.Data);
+          console.log(result.Data);
           const tokenInfo = this.getDecodedAccessToken(result.Data.token); // decode token
           // console.log(tokenInfo);
           this.authService.setSession(result.Data, tokenInfo)
