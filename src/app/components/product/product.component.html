@@ -1,29 +1,31 @@
-<div class="productCard">
-    <img class="productImg" src={{product.Photo}} />
+<a class="editProduct" routerLink="/edit">
+    <div class="productCard">
+        <img class="productImg" src={{product.Photo}} />
 
-    <div class="productInfo">
-        <p class="productName">
-            {{product.ProductName}}
+        <div class="productInfo">
+            <p class="productName">
+                {{product.ProductName}}
+            </p>
+            <p>
+                EGP {{product.EndUserPrice}}
+            </p>
+        </div>
+        <p class="description">
+            {{product.Description}}
         </p>
-        <p>
-            EGP {{product.EndUserPrice}}
-        </p>
+        <div class="productDetails">
+
+            <p>
+                <b>Id:</b> {{product.ProductId}}
+            </p>
+            <p>
+                <b>Code:</b> {{product.Code}}
+            </p>
+
+            <p>
+                <b>Quantity:</b> {{product.Quantity}}
+            </p>
+
+        </div>
     </div>
-    <p class="description">
-        {{product.Description}}
-    </p>
-    <div class="productDetails">
-
-        <p>
-            <b>Id:</b> {{product.ProductId}}
-        </p>
-        <p>
-            <b>Code:</b> {{product.Code}}
-        </p>
-
-        <p>
-            <b>Quantity:</b> {{product.Quantity}}
-        </p>
-
-    </div>
-</div>
+</a>

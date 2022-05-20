@@ -11,3 +11,10 @@
 body {
     font-family: "Urbanist", sans-serif;
 }
+
+.invalid-input {
+    color: red;
+    font-size: 14px;
+    /* font-weight: 500; */
+    margin: 10px 0 0 10px;
+}

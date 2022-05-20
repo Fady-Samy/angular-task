@@ -63,7 +63,8 @@
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-4 loginBtn" (click)="onSubmit()">
+                            <button type="submit" class="btn btn-primary btn-block mb-4 loginBtn" (click)="onSubmit()"
+                                [disabled]="signupForm.invalid">
                                 Signup
                             </button>
                         </form>

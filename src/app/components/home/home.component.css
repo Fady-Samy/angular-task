@@ -72,3 +72,41 @@
     display: flex;
     justify-content: flex-end;
 }
+
+/* Form Styles */
+.form-outline {
+    margin: 0 20px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+.activeCheckBox {
+    transform: scale(1.5);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 20px;
+}
+
+.modal-header {
+    border: none;
+}
+
+.close {
+    background-color: #f7f7f7;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+    border-radius: 0 0 20px 20px;
+    background-color: #f7f7f7;
+}
+
+.saveBtn {
+    background-color: #7e3ebf;
+    color: white;
+}

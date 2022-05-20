@@ -42,13 +42,6 @@
     width: 100px;
 }
 
-.invalid-input {
-    color: red;
-    font-size: 18px;
-    /* font-weight: 500; */
-    margin: 10px 0 0 10px;
-}
-
 .signup {
     display: flex;
     justify-content: flex-end;
