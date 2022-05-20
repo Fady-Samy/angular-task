@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import jwt_decode from 'jwt-decode';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from '@angular/router';
+import { window } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -61,6 +62,10 @@ export class LoginComponent implements OnInit {
           this.spinner.hide();
 
           this.router.navigate(['home'])
+        },
+        err => {
+          this.spinner.hide();
+          alert("Error, Check Your Credentials")
         }
       );
   }

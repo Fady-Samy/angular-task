@@ -205,6 +205,10 @@ export class HomeComponent implements OnInit {
           this.productForm.reset();
           this.spinner.hide();
           this.closeModal()
+        },
+        err => {
+          this.spinner.hide();
+          alert("There was a problem creating the product ")
         }
       );
 

@@ -84,6 +84,10 @@ export class RegisterComponent implements OnInit {
               }
             );
           }
+        },
+        err => {
+          this.spinner.hide();
+          alert("There was a problem signing up ")
         }
       );
   }
