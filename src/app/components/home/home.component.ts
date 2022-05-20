@@ -61,19 +61,23 @@ export class HomeComponent implements OnInit {
       this.userName = this.authService.getUserName()!;
       this.isAdmin = this.authService.isUserAdmin()!;
 
-      let body: ProductSearch = {
-        "pageNo": this.page,
-        "pageSize": 10,
-        "brandCategoryId": 3
-      }
-      this.productsService.getPaginatedProducts(body).subscribe((result) => {
-        console.log(result)
-        this.products = result.Data
-      });
+      this.getProductsPerPage()
     } else {
       this.router.navigate(["/"])
     }
 
+  }
+
+  getProductsPerPage() {
+    let body: ProductSearch = {
+      "pageNo": this.page,
+      "pageSize": 10,
+      "brandCategoryId": 3
+    }
+    this.productsService.getPaginatedProducts(body).subscribe((result) => {
+      console.log(result)
+      this.products = result.Data
+    });
   }
 
   //Show Modal Functions
@@ -203,6 +207,7 @@ export class HomeComponent implements OnInit {
         (result) => {
           console.log(result);
           this.productForm.reset();
+          this.getProductsPerPage();
           this.spinner.hide();
           this.closeModal()
         },
